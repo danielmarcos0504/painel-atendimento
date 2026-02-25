@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Painel de Leads</title>
+    <script src="/static/script.js" defer></script>
+</head>
+<body>
+
+<h1>Painel de Organização de Leads</h1>
+
+<h3>Importar CSV</h3>
+
+<form action="/importar" method="post" enctype="multipart/form-data">
+    <input type="file" name="arquivo" accept=".csv" required>
+    <button type="submit">Importar</button>
+</form>
+
+<hr>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Número</th>
+            <th>Email</th>
+            <th>Histórico</th>
+            <th>Tipo</th>
+            <th>Link</th>
+            <th>Imóvel</th>
+            <th>Data Criação</th>
+            <th>Canal</th>
+            <th>Status</th>
+            <th>Atendimento</th>
+            <th>Detalhes</th>
+            <th>Atendente</th>
+            <th>Ação</th>
+        </tr>
+    </thead>
+    <tbody id="lista"></tbody>
+</table>
+
+</body>
+</html>
+
