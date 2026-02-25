@@ -39,6 +39,14 @@ def criar_tabela():
 criar_tabela()
 
 # =========================
+# HEALTH CHECK (IMPORTANTE PARA RENDER)
+# =========================
+
+@app.route("/health")
+def health():
+    return "OK"
+
+# =========================
 # PÁGINA PRINCIPAL
 # =========================
 
@@ -105,7 +113,7 @@ def assumir(id):
     return jsonify({"mensagem": "Atualizado"})
 
 # =========================
-# IMPORTAR CSV (EVITA DUPLICADOS)
+# IMPORTAR CSV
 # =========================
 
 @app.route("/importar", methods=["POST"])
@@ -147,7 +155,6 @@ def importar():
                     linha.get("Detalhes")
                 ))
             except sqlite3.IntegrityError:
-                # Ignora se número já existir
                 pass
 
     conn.commit()
@@ -156,12 +163,11 @@ def importar():
     return redirect("/")
 
 # =========================
-# WEBHOOK LAIS.AI (EVITA DUPLICADOS)
+# WEBHOOK LAIS.AI
 # =========================
 
 @app.route("/webhook", methods=["POST"])
 def webhook():
-
     dados = request.get_json()
 
     conn = sqlite3.connect("atendimentos.db")
@@ -190,7 +196,6 @@ def webhook():
         conn.commit()
 
     except sqlite3.IntegrityError:
-        # Se já existir número, não insere novamente
         pass
 
     conn.close()
@@ -200,5 +205,5 @@ def webhook():
 # =========================
 
 if __name__ == "__main__":
-     app.run(host="0.0.0.0", port=10000)
+    app.run(host="0.0.0.0", port=10000)
 
